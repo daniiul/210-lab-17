@@ -127,7 +127,7 @@ Node* addNodeTail(Node* hd, int val)
             temp = temp->next;
         newVal->next = nullptr;
         newVal->value = val;
-                        temp->next = newVal;
+        temp->next = newVal;
     }
     return hd;
 }
