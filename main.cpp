@@ -13,7 +13,7 @@ struct Node {
 void output(Node *);
 Node* addNode(Node *, int);
 Node* deleteNode(Node *, Node *, Node *, int);
-Node* insertNode(Node *, Node *, Node *, int);
+Node* insertNode(Node *, Node *, Node *, int, int);
 Node* deleteList(Node *, Node *);
 
 int main() {
@@ -56,7 +56,7 @@ int main() {
     current = head;
     prev = head;
 
-    head = insertNode(head, current, prev, entry);
+    head = insertNode(head, current, prev, entry, 10000);
 
 
     output(head);
@@ -82,6 +82,9 @@ void output(Node * hd) {
     cout << endl;
 }
 
+// adds nodes to linked list
+// arguments: a node object representing the head node, an int representing value to put into new node
+// returns: the new head node
 Node* addNode(Node* hd, int val)
 {
     Node *newVal = new Node;
@@ -99,8 +102,9 @@ Node* addNode(Node* hd, int val)
     return hd;
 }
 
-
-
+// deletes nodes from linked list
+// arguments: a node object representing the head, previous, and current node, an int representing which node to delete
+// returns: the new current node
 Node* deleteNode(Node * head, Node * prev, Node *current, int entry)
 {
     // traverse that many times and delete that node
@@ -124,7 +128,10 @@ Node* deleteNode(Node * head, Node * prev, Node *current, int entry)
     return current;
 }
 
-Node* insertNode(Node * head, Node * prev, Node *current, int entry)
+// inserts nodes into linked list
+// arguments: a node object representing the head, previous, and current node, an int representing where to insert node and an int representing value in inserted node
+// returns: the new head node
+Node* insertNode(Node * head, Node * prev, Node *current, int entry, int val)
 {
     for (int i = 0; i < (entry); i++)
         if (i == 0)
@@ -135,13 +142,16 @@ Node* insertNode(Node * head, Node * prev, Node *current, int entry)
         }
     //at this point, insert a node between prev and current
     Node * newnode = new Node;
-    newnode->value = 10000;
+    newnode->value = val;
     newnode->next = current;
     prev->next = newnode;
 
     return head;
 }
 
+// deletes the list and all of its nodes
+// arguments: a node object representing the head and current node
+// returns: the new head node
 Node* deleteList(Node * head, Node * current)
 {
     // deleting the linked list
