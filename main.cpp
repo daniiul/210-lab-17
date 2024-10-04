@@ -108,9 +108,14 @@ Node* addNode(Node* hd, int val)
     return hd;
 }
 
+// adds a node to the end of a linked list
+// arguments: a node object representing the head node, an int representing value to put into new node
+// returns: the new head node
 Node* addNodeTail(Node* hd, int val)
 {
     Node *newVal = new Node;
+    Node *temp = new Node;
+    temp = hd;
     // adds node at tail
     if (!hd) { // if this is the first node, it's the new head
         hd = newVal;
@@ -118,11 +123,11 @@ Node* addNodeTail(Node* hd, int val)
         newVal->value = val;
     }
     else { // its a second or subsequent node; place at the tail
-        while (hd->next != nullptr)
-            hd = hd->next;
+        while (temp->next != nullptr)
+            temp = temp->next;
         newVal->next = nullptr;
         newVal->value = val;
-        hd->next = newVal;
+                        temp->next = newVal;
     }
     return hd;
 }
