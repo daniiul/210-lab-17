@@ -11,7 +11,7 @@ struct Node {
 };
 
 void output(Node *);
-void addNode(Node *, int);
+Node* addNode(Node *, int);
 
 int main() {
     Node *head = nullptr;
@@ -20,7 +20,7 @@ int main() {
     // create a linked list of size SIZE with random numbers 0-99
     for (int i = 0; i < SIZE; i++) {
         int tmp_val = rand() % 100;
-        addNode(head, tmp_val);
+        head = addNode(head, tmp_val);
     }
     output(head);
 
@@ -104,10 +104,9 @@ void output(Node * hd) {
     cout << endl;
 }
 
-void addNode(Node *hd, int val)
+Node* addNode(Node* hd, int val)
 {
-   Node *newVal = new Node;
-
+    Node *newVal = new Node;
     // adds node at head
     if (!hd) { // if this is the first node, it's the new head
         hd = newVal;
@@ -119,4 +118,5 @@ void addNode(Node *hd, int val)
         newVal->value = val;
         hd = newVal;
     }
+    return hd;
 }
