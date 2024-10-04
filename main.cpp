@@ -12,6 +12,7 @@ struct Node {
 
 void output(Node *);
 Node* addNode(Node *, int);
+Node* addNodeTail(Node*, int);
 Node* deleteNode(Node *, Node *, Node *, int);
 Node* insertNode(Node *, Node *, Node *, int, int);
 Node* deleteList(Node *, Node *);
@@ -25,6 +26,12 @@ int main() {
         int tmp_val = rand() % 100;
         head = addNode(head, tmp_val);
     }
+    output(head);
+
+    cout << "adding an extra node to the end: " << endl;
+
+    head = addNodeTail(head, rand() % 100);
+
     output(head);
 
     // deleting a node
@@ -58,7 +65,6 @@ int main() {
 
     head = insertNode(head, current, prev, entry, 10000);
 
-
     output(head);
 
     head = deleteList(head, current);
@@ -82,7 +88,7 @@ void output(Node * hd) {
     cout << endl;
 }
 
-// adds nodes to linked list
+// adds a node to the front of a linked list
 // arguments: a node object representing the head node, an int representing value to put into new node
 // returns: the new head node
 Node* addNode(Node* hd, int val)
@@ -98,6 +104,25 @@ Node* addNode(Node* hd, int val)
         newVal->next = hd;
         newVal->value = val;
         hd = newVal;
+    }
+    return hd;
+}
+
+Node* addNodeTail(Node* hd, int val)
+{
+    Node *newVal = new Node;
+    // adds node at tail
+    if (!hd) { // if this is the first node, it's the new head
+        hd = newVal;
+        newVal->next = nullptr;
+        newVal->value = val;
+    }
+    else { // its a second or subsequent node; place at the tail
+        while (hd->next != nullptr)
+            hd = hd->next;
+        newVal->next = nullptr;
+        newVal->value = val;
+        hd->next = newVal;
     }
     return hd;
 }
