@@ -12,6 +12,7 @@ struct Node {
 
 void output(Node *);
 Node* addNode(Node *, int);
+Node* deleteNode(Node *, Node *, int);
 
 int main() {
     Node *head = nullptr;
@@ -32,22 +33,8 @@ int main() {
     cout << "Choice --> ";
     cin >> entry;
 
-    // traverse that many times and delete that node
-    current = head;
-    Node *prev = head;
-    for (int i = 0; i < (entry-1); i++)
-        if (i == 0)
-            current = current->next;
-        else {
-            current = current->next;
-            prev = prev->next;
-        }
-    // at this point, delete current and reroute pointers
-    if (current) {  // checks for current to be valid before deleting the node
-        prev->next = current->next;
-        delete current;
-        current = nullptr;
-    }
+    head = deleteNode(head, current, entry);
+
     output(head);
 
     // insert a node
@@ -118,5 +105,27 @@ Node* addNode(Node* hd, int val)
         newVal->value = val;
         hd = newVal;
     }
+    return hd;
+}
+
+Node* deleteNode(Node *hd, Node* current, int pos)
+{
+    // traverse that many times and delete that node
+    current = hd;
+    Node *prev = hd;
+    for (int i = 0; i < (pos-1); i++)
+        if (i == 0)
+            current = current->next;
+        else {
+            current = current->next;
+            prev = prev->next;
+        }
+    // at this point, delete current and reroute pointers
+    if (current) {  // checks for current to be valid before deleting the node
+        prev->next = current->next;
+        delete current;
+        current = nullptr;
+    }
+
     return hd;
 }
